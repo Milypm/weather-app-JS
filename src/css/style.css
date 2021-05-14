@@ -1,4 +1,75 @@
 body {
   background: #bf6a90;
   color: #fff;
+  padding: 0;
+  margin: 0;
+}
+
+.header-div {
+  margin: 0;
+  padding: 10px 0 30px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.header-title-icon {
+  display: flex;
+  align-items: center;
+  width: 30%;
+  height: 50px;
+  margin: 20px 0 25px 0;
+}
+
+.header-title {
+  font-size: 45px;
+}
+
+.fa-temperature-high {
+  font-size: 45px;
+  margin-left: 10px;
+  opacity: 0.8;
+}
+
+.search-form {
+  position: relative;
+}
+
+.search-form  input {
+  border: none;
+  border-radius: 20px;
+  padding: 10px 15px;
+}
+
+.fa-arrow-right {
+  position: absolute;
+  font-size: 25px;
+  top: 6px;
+  right: 10px;
+  color: #bf6a90;
+}
+
+main {
+  display: flex;
+  justify-content: space-evenly;
+  border: 1px solid red;
+}
+
+.today-div {
+  border: 1px solid white;
+}
+
+.today-details-div {
+  display: flex;
+}
+
+.details-div {
+  display: flex;
+  flex-direction: column;
+}
+
+.next-days-div {
+  display: flex;
+  border: 1px solid white;
 }
