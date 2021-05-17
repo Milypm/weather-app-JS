@@ -1,8 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Lexend&family=M+PLUS+Rounded+1c:wght@500&display=swap');
+
 body {
-  background: #bf6a90;
+  background: linear-gradient(#5e2578, #783192, #8e649c, #9a7ba5, #b09fb6);
   color: #fff;
   padding: 0;
   margin: 0;
+  font-family: 'Lexend', Verdana, Geneva, Tahoma, sans-serif;
+  height: 100%;
 }
 
 .header-div {
@@ -19,17 +23,24 @@ body {
   align-items: center;
   width: 30%;
   height: 50px;
-  margin: 20px 0 25px 0;
+  margin: 20px 0 5px 0;
 }
 
 .header-title {
   font-size: 45px;
+  font-family: 'Fredoka One', Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .fa-temperature-high {
   font-size: 45px;
   margin-left: 10px;
   opacity: 0.8;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .search-form {
@@ -47,29 +58,131 @@ body {
   font-size: 25px;
   top: 6px;
   right: 10px;
-  color: #bf6a90;
+  color: #783192;
+  cursor: pointer;
 }
 
-main {
+.today-next-days-div {
+  width: 100%;
+  margin-top: 40px;
   display: flex;
   justify-content: space-evenly;
-  border: 1px solid red;
 }
 
 .today-div {
-  border: 1px solid white;
+  box-sizing: border-box;
+  width: 35%;
+  display: flex;
+  padding: 20px;
+  flex-direction: column;
+  justify-content: flex-start;
+  border-radius: 15px;
+  /* border: 0.5px solid #744b87; */
+  background: rgba(40, 25, 46, 0.1);
+  position: relative;
+}
+
+#flag-id {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  right: 40px;
+}
+
+#today-icon {
+  position: absolute;
+  right: 50px;
+  top: 140px;
+  font-size: 70px;
+  opacity: 0.7;
+}
+
+.today-div h3 {
+  text-transform: capitalize;
+  font-size: 35px;
+  margin: 0 0 10px 0;
+}
+
+.today-time-div {
+  margin: 0;
+  width: 70%;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.today-div h5 {
+  margin: 0;
+  padding: 0;
+  font-size: 30px;
+}
+
+.today-hour {
+  margin: 0;
+}
+
+.today-temp {
+  font-size: 45px;
+  margin: 0 0 10px 0;
+}
+
+.today-atmosphere {
+  font-size: 25px;
+  margin: 0 0 5px 0;
+}
+
+.today-wind {
+  margin: 0 0 20px 0;
+  font-size: 20px;
 }
 
 .today-details-div {
   display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .details-div {
+  width: 25%;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  border-radius: 15px;
+  background: rgba(71, 45, 83, 0.3);
+  padding: 10px 15px;
 }
 
 .next-days-div {
+  width: 55%;
   display: flex;
-  border: 1px solid white;
+  justify-content: space-between;
+}
+
+.day-div {
+  width: 31%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 15px;
+  background: rgba(71, 45, 83, 0.3);
+  /* padding: 10px 15px; */
+}
+
+.footer-sub {
+  height: 55px;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+
+.footer-text-div {
+  display: flex;
+  justify-content: space-between;
+  width: 60%;
+}
+
+.footer-year {
+  margin-right: 50px;
 }
