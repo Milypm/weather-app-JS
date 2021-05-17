@@ -2,7 +2,7 @@ import fetchWeather from './api';
 import setTodayDetails from './todaysDetails';
 import setNextDays from './nextDays';
 
-const setMain = () => {
+const setMain = (() => {
   const mainContainer = document.createElement('div');
   mainContainer.classList.add('main-container');
 
@@ -18,15 +18,42 @@ const setMain = () => {
   searchIcon.addEventListener('click', function () {
     const city = document.querySelector('#search-input-id').value;
     fetchWeather.findLocation(city).then((fetchData) => {
-      console.log(fetchData);
       document.getElementById('city-name-id').textContent = city;
       document.getElementById('today-hour-id').textContent = fetchData.dateTime;
-      document.getElementById('today-temp-id').textContent = fetchData.degrees;
+      document.getElementById('today-temp-id').textContent = `${fetchData.degrees}°`;
       document.getElementById('today-atmosphere-id').textContent = fetchData.atmosphere;
-      document.getElementById('today-wind-id').textContent = fetchData.wind;
+      document.getElementById('today-wind-id').textContent = `Wind: ${fetchData.wind}km/hr`;
+      document.getElementById('flag-id').src = `https://www.countryflags.io/${fetchData.country}/shiny/64.png`;
+      const getclass = setIcon(fetchData.main, fetchData.description, fetchData.iconId);
+      document.getElementById('today-icon').className = getclass;
+      document.querySelector('#search-input-id').value = '';
     });
-    
   });
+
+  const setIcon = (main, description, iconId) => {
+    const otherConditions = 'mist smoke haze dust fog sand ash squall';
+    if (iconId.includes('d')) {
+      if (main === 'Clear' && description === 'clear sky') { return 'fas fa-sun'; }
+      if (main === 'Clouds' && description === 'few clouds') { return 'fas fa-cloud-sun'; }
+      if (main === 'Clouds') { return 'fas fa-cloud'; }
+      if (main === 'Rain' && description === 'shower rain') { return 'fas fa-cloud-sun-rain'; }
+      if (main === 'Rain') { return 'fas fa-cloud-rain'; }
+      if (main === 'Thunderstorm') { return 'fas fa-bolt'; }
+      if (main === 'Snow') { return 'fas fa-snowflake'; }
+      if (main === 'Tornado') { return 'fas fa-exclamation-circle'; }
+      if (otherConditions.includes(main)) { return 'fas fa-smog'; }
+    } else {
+      if (main === 'Clear' && description === 'clear sky') { return 'fas fa-moon'; }
+      if (main === 'Clouds' && description === 'few clouds') { return 'fas fa-cloud-moon'; }
+      if (main === 'Clouds') { return 'fas fa-cloud'; }
+      if (main === 'Rain' && description === 'shower rain') { return 'fas fa-cloud-moon-rain'; }
+      if (main === 'Rain') { return 'fas fa-cloud-rain'; }
+      if (main === 'Thunderstorm') { return 'fas fa-bolt'; }
+      if (main === 'Snow') { return 'fas fa-snowflake'; }
+      if (main === 'Tornado') { return 'fas fa-exclamation-circle'; }
+      if (otherConditions.includes(main)) { return 'fas fa-smog'; }
+    }
+  };
 
   const todayContainer = document.createElement('div');
   todayContainer.classList.add('today-div');
@@ -67,25 +94,29 @@ const setMain = () => {
   const todayNextDays = document.createElement('div');
   todayNextDays.classList.add('today-next-days-div');
 
-  search.appendChild(searchInput);
-  search.appendChild(searchIcon);
-  todayContainer.appendChild(cityName);
-  todayContainer.appendChild(flag);
-  todayContainer.appendChild(todayIcon);
-  todayTimeContainer.appendChild(todayText);
-  todayTimeContainer.appendChild(todayHour);
-  todayContainer.appendChild(todayTimeContainer);
-  todayContainer.appendChild(todayTemp);
-  atmosphereWind.appendChild(todayAtmosphere);
-  atmosphereWind.appendChild(todayWind);
-  todayContainer.appendChild(atmosphereWind);
-  todayContainer.appendChild(setTodayDetails());
-  todayNextDays.appendChild(todayContainer);
-  todayNextDays.appendChild(setNextDays());
-  mainContainer.appendChild(search);
-  mainContainer.appendChild(todayNextDays);
-
-  return mainContainer;
-};
+  const appendMain = () => {
+    search.appendChild(searchInput);
+    search.appendChild(searchIcon);
+    todayContainer.appendChild(cityName);
+    todayContainer.appendChild(flag);
+    todayContainer.appendChild(todayIcon);
+    todayTimeContainer.appendChild(todayText);
+    todayTimeContainer.appendChild(todayHour);
+    todayContainer.appendChild(todayTimeContainer);
+    todayContainer.appendChild(todayTemp);
+    atmosphereWind.appendChild(todayAtmosphere);
+    atmosphereWind.appendChild(todayWind);
+    todayContainer.appendChild(atmosphereWind);
+    todayContainer.appendChild(setTodayDetails());
+    todayNextDays.appendChild(todayContainer);
+    todayNextDays.appendChild(setNextDays());
+    mainContainer.appendChild(search);
+    mainContainer.appendChild(todayNextDays);
+  
+    return mainContainer;
+  }
+  
+  return { appendMain };
+})();
 
 export default setMain;

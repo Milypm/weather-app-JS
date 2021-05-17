@@ -39,7 +39,7 @@ const start = () => {
   const header = document.getElementById('header');
   header.appendChild(setHeader());
   const main = document.getElementById('main');
-  main.appendChild(setMain());
+  main.appendChild(setMain.appendMain());
   const footer = document.getElementById('footer');
   footer.appendChild(setFooter());
 };

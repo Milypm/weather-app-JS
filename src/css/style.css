@@ -83,8 +83,8 @@ body {
 }
 
 #flag-id {
-  width: 40px;
-  height: 40px;
+  width: 45px;
+  height: 45px;
   position: absolute;
   right: 40px;
 }
@@ -92,7 +92,7 @@ body {
 #today-icon {
   position: absolute;
   right: 50px;
-  top: 140px;
+  top: 130px;
   font-size: 70px;
   opacity: 0.7;
 }
@@ -127,6 +127,7 @@ body {
 }
 
 .today-atmosphere {
+  text-transform: capitalize;
   font-size: 25px;
   margin: 0 0 5px 0;
 }
