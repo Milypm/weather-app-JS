@@ -119,6 +119,7 @@ body {
 
 .today-hour {
   margin: 0;
+  font-size: 15px;
 }
 
 .today-temp {
@@ -151,6 +152,15 @@ body {
   border-radius: 15px;
   background: rgba(71, 45, 83, 0.3);
   padding: 10px 15px;
+}
+
+.details-div h4 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.details-div i {
+
 }
 
 .next-days-div {

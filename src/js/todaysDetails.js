@@ -6,8 +6,10 @@ const setTodayDetails = () => {
   morning.classList.add('details-div');
   morning.textContent = 'Morning';
   const tempMorning = document.createElement('h4');
+  tempMorning.setAttribute('id', 'temp-morning-id');
   tempMorning.textContent = '10°';
   const iconMorning = document.createElement('i');
+  iconMorning.setAttribute('id', 'icon-morning-id');
   iconMorning.classList.add('fas');
   iconMorning.classList.add('fa-cloud-sun-rain');
 
@@ -15,8 +17,10 @@ const setTodayDetails = () => {
   afternoon.classList.add('details-div');
   afternoon.textContent = 'Afternoon';
   const tempAfternoon = document.createElement('h4');
+  tempAfternoon.setAttribute('id', 'temp-afternoon-id');
   tempAfternoon.textContent = '13°';
   const iconAfternoon = document.createElement('i');
+  iconAfternoon.setAttribute('id', 'icon-afternoon-id');
   iconAfternoon.classList.add('fas');
   iconAfternoon.classList.add('fa-cloud');
 
@@ -24,8 +28,10 @@ const setTodayDetails = () => {
   night.classList.add('details-div');
   night.textContent = 'Night';
   const tempNight = document.createElement('h4');
+  tempNight.setAttribute('id', 'temp-night-id');
   tempNight.textContent = '8°';
   const iconNight = document.createElement('i');
+  iconNight.setAttribute('id', 'icon-night-id');
   iconNight.classList.add('fas');
   iconNight.classList.add('fa-cloud-moon-rain');
 

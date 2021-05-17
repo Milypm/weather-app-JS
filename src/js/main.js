@@ -19,7 +19,7 @@ const setMain = (() => {
     const city = document.querySelector('#search-input-id').value;
     fetchWeather.findLocation(city).then((fetchData) => {
       document.getElementById('city-name-id').textContent = city;
-      document.getElementById('today-hour-id').textContent = fetchData.dateTime;
+      document.getElementById('today-hour-id').textContent = `At ${fetchData.dateTime}`;
       document.getElementById('today-temp-id').textContent = `${fetchData.degrees}°`;
       document.getElementById('today-atmosphere-id').textContent = fetchData.atmosphere;
       document.getElementById('today-wind-id').textContent = `Wind: ${fetchData.wind}km/hr`;
