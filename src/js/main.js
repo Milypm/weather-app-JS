@@ -11,24 +11,34 @@ const setMain = (() => {
   const searchInput = document.createElement('input');
   searchInput.setAttribute('id', 'search-input-id');
   searchInput.type = 'text';
-  searchInput.placeholder = 'Search city or zip code';
+  searchInput.placeholder = 'Search city or zip code&country';
   const searchIcon = document.createElement('i');
   searchIcon.classList.add('fas');
   searchIcon.classList.add('fa-arrow-right');
   searchIcon.addEventListener('click', function () {
-    const city = document.querySelector('#search-input-id').value;
-    fetchWeather.findLocation(city).then((fetchData) => {
-      document.getElementById('city-name-id').textContent = city;
-      document.getElementById('today-hour-id').textContent = `At ${fetchData.dateTime}`;
-      document.getElementById('today-temp-id').textContent = `${fetchData.degrees}°`;
-      document.getElementById('today-atmosphere-id').textContent = fetchData.atmosphere;
-      document.getElementById('today-wind-id').textContent = `Wind: ${fetchData.wind}km/hr`;
-      document.getElementById('flag-id').src = `https://www.countryflags.io/${fetchData.country}/shiny/64.png`;
-      const getclass = setIcon(fetchData.main, fetchData.description, fetchData.iconId);
-      document.getElementById('today-icon').className = getclass;
-      document.querySelector('#search-input-id').value = '';
-    });
+    if (document.querySelector('#search-input-id').value.includes(',')) {
+      const zipCode = document.querySelector('#search-input-id').value;
+      fetchWeather.findByZip(zipCode).then((fetchData) => {
+        console.log(fetchData);
+      });
+    } else {
+      const city = document.querySelector('#search-input-id').value;
+      fetchWeather.findByCity(city).then((fetchData) => {
+        document.getElementById('city-name-id').textContent = city;
+        document.getElementById('today-hour-id').textContent = fetchData.dateTime;
+        document.getElementById('today-temp-id').textContent = `${fetchData.degrees}°`;
+        document.getElementById('today-atmosphere-id').textContent = fetchData.atmosphere;
+        document.getElementById('today-wind-id').textContent = `Wind: ${fetchData.wind}km/hr`;
+        document.getElementById('flag-id').src = `https://www.countryflags.io/${fetchData.country}/flat/64.png`;
+        const getclass = setIcon(fetchData.main, fetchData.description, fetchData.iconId);
+        document.getElementById('today-icon').className = getclass;
+        document.querySelector('#search-input-id').value = '';
+      });
+    }
   });
+  const textBelowInput = document.createElement('p');
+  textBelowInput.classList.add('text-below-input');
+  textBelowInput.textContent = `*If searching by zip code, please also provide the country's full-name separated by a comma (,). I.E.: "11123, Country-name"`
 
   const setIcon = (main, description, iconId) => {
     const otherConditions = 'mist smoke haze dust fog sand ash squall';
@@ -63,7 +73,7 @@ const setMain = (() => {
   cityName.textContent = 'Dublin';
   const flag = document.createElement('img');
   flag.setAttribute('id', 'flag-id');
-  flag.src = 'https://www.countryflags.io/IE/shiny/64.png';
+  flag.src = 'https://www.countryflags.io/IE/flat/64.png';
   const todayIcon = document.createElement('i');
   todayIcon.setAttribute('id', 'today-icon');
   todayIcon.classList.add('fas');
@@ -75,7 +85,7 @@ const setMain = (() => {
   const todayHour = document.createElement('p');
   todayHour.classList.add('today-hour');
   todayHour.setAttribute('id', 'today-hour-id');
-  todayHour.textContent = 'Sat May 15th at 6:30 PM';
+  todayHour.textContent = 'Sat May 15th, 6:30 PM';
   const todayTemp = document.createElement('h2');
   todayTemp.classList.add('today-temp');
   todayTemp.setAttribute('id', 'today-temp-id');
@@ -97,6 +107,7 @@ const setMain = (() => {
   const appendMain = () => {
     search.appendChild(searchInput);
     search.appendChild(searchIcon);
+    search.appendChild(textBelowInput);
     todayContainer.appendChild(cityName);
     todayContainer.appendChild(flag);
     todayContainer.appendChild(todayIcon);
