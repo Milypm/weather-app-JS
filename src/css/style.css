@@ -11,7 +11,7 @@ body {
 
 .header-div {
   margin: 0;
-  padding: 10px 0 30px 0;
+  padding: 30px 0 30px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -21,7 +21,8 @@ body {
 .header-title-icon {
   display: flex;
   align-items: center;
-  width: 30%;
+  justify-content: space-between;
+  width: 27%;
   height: 50px;
   margin: 20px 0 5px 0;
 }
@@ -68,13 +69,13 @@ body {
 }
 
 .text-below-input {
-  font-size: 13px;
+  font-size: 14px;
   text-align: center;
 }
 
 .today-next-days-div {
   width: 100%;
-  margin-top: 40px;
+  margin-top: 70px;
   display: flex;
   justify-content: space-evenly;
 }
@@ -115,7 +116,7 @@ body {
 
 .today-time-div {
   margin: 0;
-  width: 62%;
+  width: 64%;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -192,8 +193,29 @@ body {
   /* padding: 10px 15px; */
 }
 
+.next-date {
+  margin: 0;
+  margin-top: 20px;
+  font-size: 20px;
+}
+
+.next-temp {
+  margin: 0;
+  font-size: 32px;
+}
+
+.next-atmosphere {
+  margin: 0;
+  font-size: 23px;
+}
+
+.next-wind {
+  margin: 0;
+  font-size: 18px;
+}
+
 .footer-sub {
-  height: 55px;
+  height: 75px;
   margin-top: 30px;
   display: flex;
   flex-direction: column;
@@ -205,6 +227,8 @@ body {
   display: flex;
   justify-content: space-between;
   width: 60%;
+  font-size: 20px;
+  font-family: 'Fredoka One', Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .footer-year {

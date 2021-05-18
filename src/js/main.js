@@ -15,36 +15,45 @@ const setMain = (() => {
   const searchIcon = document.createElement('i');
   searchIcon.classList.add('fas');
   searchIcon.classList.add('fa-arrow-right');
-  searchIcon.addEventListener('click', function () {
-    if (document.querySelector('#search-input-id').value.includes(',')) {
-      const zipCode = document.querySelector('#search-input-id').value;
-      fetchWeather.findByZip(zipCode).then((fetchData) => {
-        console.log(fetchData);
+  searchIcon.addEventListener('click', function() {
+    const input = document.querySelector('#search-input-id').value;
+    const splitInput = input.split(' ');
+    if (Number.isInteger(parseInt(splitInput[0]))) {
+      fetchWeather.findByZip(splitInput).then((fetchData) => {
+        const cityByZip = fetchData.zipCity;
+        todayCurrentUI(fetchData, cityByZip);
       });
     } else {
-      const city = document.querySelector('#search-input-id').value;
-      fetchWeather.findByCity(city).then((fetchData) => {
-        document.getElementById('city-name-id').textContent = city;
-        document.getElementById('today-hour-id').textContent = fetchData.dateTime;
-        document.getElementById('today-temp-id').textContent = `${fetchData.degrees}°`;
-        document.getElementById('today-atmosphere-id').textContent = fetchData.atmosphere;
-        document.getElementById('today-wind-id').textContent = `Wind: ${fetchData.wind}km/hr`;
-        document.getElementById('flag-id').src = `https://www.countryflags.io/${fetchData.country}/flat/64.png`;
-        const getclass = setIcon(fetchData.main, fetchData.description, fetchData.iconId);
-        document.getElementById('today-icon').className = getclass;
-        document.querySelector('#search-input-id').value = '';
+      const cityByCity = document.querySelector('#search-input-id').value;
+      fetchWeather.findByCity(cityByCity).then((fetchData) => {
+        todayCurrentUI(fetchData, cityByCity);
+        setNextDays.nextDaysUI(fetchData);
+        setTodayDetails.todayDetailsUI(fetchData);
       });
     }
   });
   const textBelowInput = document.createElement('p');
   textBelowInput.classList.add('text-below-input');
-  textBelowInput.textContent = `*If searching by zip code, please also provide the country's full-name separated by a comma (,). I.E.: "11123, Country-name"`
+  textBelowInput.textContent = `*If searching by zip code, please also provide the country's full-name separated by a space. I.E.: "11123 Country-name"`
+
+  const todayCurrentUI = (fetchData, city) => {
+    document.getElementById('city-name-id').textContent = city;
+    document.getElementById('today-hour-id').textContent = fetchData.dateTime;
+    document.getElementById('today-temp-id').textContent = `${fetchData.degrees}°`;
+    document.getElementById('today-atmosphere-id').textContent = fetchData.atmosphere;
+    document.getElementById('today-wind-id').textContent = `Wind: ${fetchData.wind}km/hr`;
+    document.getElementById('flag-id').src = `https://www.countryflags.io/${fetchData.country}/flat/64.png`;
+    const getclass = setIcon(fetchData.main, fetchData.atmosphere, fetchData.iconId);
+    document.getElementById('today-icon').className = getclass;
+    document.querySelector('#search-input-id').value = '';
+  };
 
   const setIcon = (main, description, iconId) => {
     const otherConditions = 'mist smoke haze dust fog sand ash squall';
     if (iconId.includes('d')) {
       if (main === 'Clear' && description === 'clear sky') { return 'fas fa-sun'; }
       if (main === 'Clouds' && description === 'few clouds') { return 'fas fa-cloud-sun'; }
+      if (main === 'Clouds' && description === 'scattered clouds') { return 'fas fa-cloud-sun'; }
       if (main === 'Clouds') { return 'fas fa-cloud'; }
       if (main === 'Rain' && description === 'shower rain') { return 'fas fa-cloud-sun-rain'; }
       if (main === 'Rain') { return 'fas fa-cloud-rain'; }
@@ -55,6 +64,7 @@ const setMain = (() => {
     } else {
       if (main === 'Clear' && description === 'clear sky') { return 'fas fa-moon'; }
       if (main === 'Clouds' && description === 'few clouds') { return 'fas fa-cloud-moon'; }
+      if (main === 'Clouds' && description === 'scattered clouds') { return 'fas fa-cloud-moon'; }
       if (main === 'Clouds') { return 'fas fa-cloud'; }
       if (main === 'Rain' && description === 'shower rain') { return 'fas fa-cloud-moon-rain'; }
       if (main === 'Rain') { return 'fas fa-cloud-rain'; }
@@ -118,9 +128,9 @@ const setMain = (() => {
     atmosphereWind.appendChild(todayAtmosphere);
     atmosphereWind.appendChild(todayWind);
     todayContainer.appendChild(atmosphereWind);
-    todayContainer.appendChild(setTodayDetails());
+    todayContainer.appendChild(setTodayDetails.appendTodayDetails());
     todayNextDays.appendChild(todayContainer);
-    todayNextDays.appendChild(setNextDays());
+    todayNextDays.appendChild(setNextDays.appendNextDays());
     mainContainer.appendChild(search);
     mainContainer.appendChild(todayNextDays);
   

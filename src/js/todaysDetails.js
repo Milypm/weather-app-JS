@@ -1,4 +1,4 @@
-const setTodayDetails = () => {
+const setTodayDetails = (() => {
   const todayDetailsContainer = document.createElement('div');
   todayDetailsContainer.classList.add('today-details-div');
 
@@ -17,7 +17,7 @@ const setTodayDetails = () => {
   afternoon.classList.add('details-div');
   afternoon.textContent = 'Afternoon';
   const tempAfternoon = document.createElement('h4');
-  tempAfternoon.setAttribute('id', 'temp-afternoon-id');
+  tempAfternoon.setAttribute('id', 'temp-evening-id');
   tempAfternoon.textContent = '13°';
   const iconAfternoon = document.createElement('i');
   iconAfternoon.setAttribute('id', 'icon-afternoon-id');
@@ -35,17 +35,27 @@ const setTodayDetails = () => {
   iconNight.classList.add('fas');
   iconNight.classList.add('fa-cloud-moon-rain');
 
-  morning.appendChild(tempMorning);
-  morning.appendChild(iconMorning);
-  afternoon.appendChild(tempAfternoon);
-  afternoon.appendChild(iconAfternoon);
-  night.appendChild(tempNight);
-  night.appendChild(iconNight);
-  todayDetailsContainer.appendChild(morning);
-  todayDetailsContainer.appendChild(afternoon);
-  todayDetailsContainer.appendChild(night);
+  const appendTodayDetails = () => {
+    morning.appendChild(tempMorning);
+    //morning.appendChild(iconMorning);
+    afternoon.appendChild(tempAfternoon);
+    //afternoon.appendChild(iconAfternoon);
+    night.appendChild(tempNight);
+    //night.appendChild(iconNight);
+    todayDetailsContainer.appendChild(morning);
+    todayDetailsContainer.appendChild(afternoon);
+    todayDetailsContainer.appendChild(night);
+  
+    return todayDetailsContainer;
+  };
 
-  return todayDetailsContainer;
-};
+  const todayDetailsUI = (fetchData) => {
+    tempMorning.textContent = `${fetchData.morningTemp}°`;
+    tempAfternoon.textContent = `${fetchData.eveningTemp}°`;
+    tempNight.textContent = `${fetchData.nightTemp}°`;
+  };
+
+  return { appendTodayDetails, todayDetailsUI };
+})();
 
 export default setTodayDetails;

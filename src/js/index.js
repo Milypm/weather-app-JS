@@ -21,7 +21,7 @@ const setFooter = () => {
 
   const siteRights = document.createElement('p');
   siteRights.classList.add('footer-text');
-  siteRights.textContent = 'Built by Mily Puente ';
+  siteRights.textContent = 'By Mily Puente ';
   siteRights.appendChild(myGithub);
 
   const siteYear = document.createElement('p');
