@@ -42,6 +42,34 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
+}
+
+.change-unit-div {
+  width: 70px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  top: -17px;
+  right: 390px;
+  padding: 0;
+  margin: 0;
+}
+
+#celsius-id,
+#fahrenheit-id {
+  border-radius: 50%;
+  padding: 4px 5px 4px 8px;
+  color: #fff;
+  font-weight: 600;
+}
+
+#celsius-id:hover,
+#fahrenheit-id:hover {
+  cursor: pointer;
+  color: #5e2578;
+  background: rgba(255, 255, 255, 0.8);
 }
 
 .search-form {
@@ -194,8 +222,7 @@ body {
 }
 
 .next-date {
-  margin: 0;
-  margin-top: 20px;
+  margin: 20px 0 25px 0;
   font-size: 20px;
 }
 
@@ -205,8 +232,9 @@ body {
 }
 
 .next-atmosphere {
-  margin: 0;
+  margin: 15px 0 10px 0;
   font-size: 23px;
+  text-transform: capitalize;
 }
 
 .next-wind {
@@ -214,9 +242,15 @@ body {
   font-size: 18px;
 }
 
+.day-div i {
+  margin-top: 50px;
+  font-size: 60px;
+  opacity: 0.7;
+}
+
 .footer-sub {
-  height: 75px;
-  margin-top: 30px;
+  height: 65px;
+  margin-top: 50px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -227,8 +261,13 @@ body {
   display: flex;
   justify-content: space-between;
   width: 60%;
-  font-size: 20px;
-  font-family: 'Fredoka One', Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 18px;
+}
+
+.fa-github-alt {
+  color: #fff;
+  margin-left: 5px;
+  font-size: 23px;
 }
 
 .footer-year {

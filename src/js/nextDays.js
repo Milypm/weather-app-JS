@@ -79,6 +79,12 @@ const setNextDays = (() => {
     nextOneWind.textContent = `Wind: ${fetchData.nextOneWind}km/hr`;
     nextTwoWind.textContent = `Wind: ${fetchData.nextTwoWind}km/hr`;
     nextThreeWind.textContent = `Wind: ${fetchData.nextThreeWind}km/hr`;
+    const getIconOne = setMain.setIcon(fetchData.nextOneMain, fetchData.nextOneAtmosphere, fetchData.nextOneIcon);
+    const getIconTwo = setMain.setIcon(fetchData.nextTwoMain, fetchData.nextTwoAtmosphere, fetchData.nextTwoIcon);
+    const getIconThree = setMain.setIcon(fetchData.nextThreeMain, fetchData.nextThreeAtmosphere, fetchData.nextThreeIcon);
+    nextOneIcon.className = getIconOne;
+    nextTwoIcon.className = getIconTwo;
+    nextThreeIcon.className = getIconThree;
   };
   return { appendNextDays, nextDaysUI };
 })();

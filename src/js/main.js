@@ -75,19 +75,25 @@ const setMain = (() => {
     }
   };
 
+  const changeUnitContainer = document.createElement('div');
+  changeUnitContainer.classList.add('change-unit-div');
+  const celsius = document.createElement('h4');
+  celsius.setAttribute('id', 'celsius-id');
+  celsius.textContent = 'C°';
+  const fahrenheit = document.createElement('h4');
+  fahrenheit.setAttribute('id', 'fahrenheit-id');
+  fahrenheit.textContent = 'F°';
+
   const todayContainer = document.createElement('div');
   todayContainer.classList.add('today-div');
-  
   const cityName = document.createElement('h3');
   cityName.setAttribute('id', 'city-name-id');
-  cityName.textContent = 'Dublin';
+  cityName.textContent = 'Monterrey';
   const flag = document.createElement('img');
   flag.setAttribute('id', 'flag-id');
-  flag.src = 'https://www.countryflags.io/IE/flat/64.png';
+  flag.src = 'https://www.countryflags.io/MX/flat/64.png';
   const todayIcon = document.createElement('i');
   todayIcon.setAttribute('id', 'today-icon');
-  todayIcon.classList.add('fas');
-  todayIcon.classList.add('fa-cloud');
   const todayTimeContainer = document.createElement('div');
   todayTimeContainer.classList.add('today-time-div');
   const todayText = document.createElement('h5');
@@ -95,26 +101,32 @@ const setMain = (() => {
   const todayHour = document.createElement('p');
   todayHour.classList.add('today-hour');
   todayHour.setAttribute('id', 'today-hour-id');
-  todayHour.textContent = 'Sat May 15th, 6:30 PM';
   const todayTemp = document.createElement('h2');
   todayTemp.classList.add('today-temp');
   todayTemp.setAttribute('id', 'today-temp-id');
-  todayTemp.textContent = '13°';
   const atmosphereWind = document.createElement('div');
   atmosphereWind.classList.add('atmosphere-wind-div');
   const todayAtmosphere = document.createElement('p');
   todayAtmosphere.classList.add('today-atmosphere');
   todayAtmosphere.setAttribute('id', 'today-atmosphere-id');
-  todayAtmosphere.textContent = 'Clouds';
   const todayWind = document.createElement('p');
   todayWind.classList.add('today-wind');
   todayWind.setAttribute('id', 'today-wind-id');
-  todayWind.textContent = 'Wind: 1km/hr';
-
   const todayNextDays = document.createElement('div');
   todayNextDays.classList.add('today-next-days-div');
 
+  const defaultCity = () => {
+    const monterrey = 'monterrey';
+    fetchWeather.findByCity(monterrey).then((fetchData) => {
+      todayCurrentUI(fetchData, monterrey);
+      setNextDays.nextDaysUI(fetchData);
+      setTodayDetails.todayDetailsUI(fetchData);
+    });
+  };
+
   const appendMain = () => {
+    changeUnitContainer.appendChild(celsius);
+    changeUnitContainer.appendChild(fahrenheit);
     search.appendChild(searchInput);
     search.appendChild(searchIcon);
     search.appendChild(textBelowInput);
@@ -131,13 +143,16 @@ const setMain = (() => {
     todayContainer.appendChild(setTodayDetails.appendTodayDetails());
     todayNextDays.appendChild(todayContainer);
     todayNextDays.appendChild(setNextDays.appendNextDays());
+    mainContainer.appendChild(changeUnitContainer);
     mainContainer.appendChild(search);
     mainContainer.appendChild(todayNextDays);
   
     return mainContainer;
   }
-  
-  return { appendMain };
+
+  document.addEventListener('DOMContentLoaded', defaultCity());
+
+  return { appendMain, setIcon };
 })();
 
 export default setMain;

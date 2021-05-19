@@ -24,6 +24,9 @@ const fetchWeather = (() => {
     nextOneAtmosphere: '',
     nextTwoAtmosphere: '',
     nextThreeAtmosphere: '',
+    nextOneMain: '',
+    nextTwoMain: '',
+    nextThreeMain: '',
     nextOneWind: '',
     nextTwoWind: '',
     nextThreeWind: ''
@@ -42,7 +45,7 @@ const fetchWeather = (() => {
       getData(responseOneCall);
       return data;
     } catch (error) {
-        alert('Error: Oops, something went wrong :(');
+        alert('Error: Oops, we could not find that city name :(');
     }
   };
 
@@ -102,20 +105,24 @@ const fetchWeather = (() => {
     const nextTemp1 = new Date(jsonData.daily[1].dt * 1000);
     data.nextOneTime = format(nextTemp1, 'E MMM do');
     data.nextOneTemp = Math.floor(parseInt(jsonData.daily[1].temp.morn)).toString();
+    data.nextOneAtmosphere = jsonData.daily[1].weather[0].description;
+    data.nextOneMain = jsonData.daily[1].weather[0].main;
+    data.nextOneIcon = jsonData.daily[1].weather[0].icon;
+    data.nextOneWind = Math.floor((parseInt(jsonData.daily[1].wind_speed) / 1000) * 3600);
     const nextTemp2 = new Date(jsonData.daily[2].dt * 1000);
     data.nextTwoTime = format(nextTemp2, 'E MMM do');
     data.nextTwoTemp = Math.floor(parseInt(jsonData.daily[2].temp.morn)).toString();
+    data.nextTwoAtmosphere = jsonData.daily[2].weather[0].description;
+    data.nextTwoMain = jsonData.daily[2].weather[0].main;
+    data.nextTwoIcon = jsonData.daily[2].weather[0].icon;
+    data.nextTwoWind = Math.floor((parseInt(jsonData.daily[2].wind_speed) / 1000) * 3600);
     const nextTemp3 = new Date(jsonData.daily[3].dt * 1000);
     data.nextThreeTime = format(nextTemp3, 'E MMM do');
     data.nextThreeTemp = Math.floor(parseInt(jsonData.daily[3].temp.morn)).toString();
-    data.nextOneAtmosphere = jsonData.daily[1].weather[0].description;
-    data.nextOneWind = Math.floor((parseInt(jsonData.daily[1].wind_speed) / 1000) * 3600);
-    data.nextTwoAtmosphere = jsonData.daily[2].weather[0].description;
-    data.nextTwoWind = Math.floor((parseInt(jsonData.daily[2].wind_speed) / 1000) * 3600);
     data.nextThreeAtmosphere = jsonData.daily[3].weather[0].description;
+    data.nextThreeMain = jsonData.daily[3].weather[0].main;
+    data.nextThreeIcon = jsonData.daily[3].weather[0].icon;
     data.nextThreeWind = Math.floor((parseInt(jsonData.daily[3].wind_speed) / 1000) * 3600);
-  
-  
   };
 
   return { findByCity, findByZip };
