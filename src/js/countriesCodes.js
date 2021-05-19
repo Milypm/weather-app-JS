@@ -245,13 +245,13 @@ const getCountryCode = (() => {
       EH: 'Western Sahara',
       YE: 'Yemen',
       ZM: 'Zambia',
-      ZW: 'Zimbabwe'
-    }
+      ZW: 'Zimbabwe',
+    };
     return isoCountries;
   };
 
   const getCountryName = (object, countryName) => {
-    const findCode = Object.keys(object).find(key => object[key] === countryName);
+    const findCode = Object.keys(object).find((key) => object[key] === countryName);
     return findCode;
   };
 

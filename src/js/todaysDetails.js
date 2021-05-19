@@ -1,3 +1,5 @@
+import setMain from './main';
+
 const setTodayDetails = (() => {
   const todayDetailsContainer = document.createElement('div');
   todayDetailsContainer.classList.add('today-details-div');
@@ -37,16 +39,37 @@ const setTodayDetails = (() => {
 
   const appendTodayDetails = () => {
     morning.appendChild(tempMorning);
-    //morning.appendChild(iconMorning);
     afternoon.appendChild(tempAfternoon);
-    //afternoon.appendChild(iconAfternoon);
     night.appendChild(tempNight);
-    //night.appendChild(iconNight);
     todayDetailsContainer.appendChild(morning);
     todayDetailsContainer.appendChild(afternoon);
     todayDetailsContainer.appendChild(night);
-  
+
     return todayDetailsContainer;
+  };
+
+  const todayDetailsValuestoCel = () => {
+    const currentMornTemp = tempMorning.textContent;
+    const convertedMornTemp = setMain.fahToCel(currentMornTemp);
+    tempMorning.textContent = `${convertedMornTemp}°`;
+    const currentEvenTemp = tempAfternoon.textContent;
+    const convertedEvenTemp = setMain.fahToCel(currentEvenTemp);
+    tempAfternoon.textContent = `${convertedEvenTemp}°`;
+    const currentNightTemp = tempNight.textContent;
+    const convertedNightTemp = setMain.fahToCel(currentNightTemp);
+    tempNight.textContent = `${convertedNightTemp}°`;
+  };
+
+  const todayDetailsValuestoFah = () => {
+    const currentMornTemp = tempMorning.textContent;
+    const convertedMornTemp = setMain.celToFah(currentMornTemp);
+    tempMorning.textContent = `${convertedMornTemp}°`;
+    const currentEvenTemp = tempAfternoon.textContent;
+    const convertedEvenTemp = setMain.celToFah(currentEvenTemp);
+    tempAfternoon.textContent = `${convertedEvenTemp}°`;
+    const currentNightTemp = tempNight.textContent;
+    const convertedNightTemp = setMain.celToFah(currentNightTemp);
+    tempNight.textContent = `${convertedNightTemp}°`;
   };
 
   const todayDetailsUI = (fetchData) => {
@@ -55,7 +78,9 @@ const setTodayDetails = (() => {
     tempNight.textContent = `${fetchData.nightTemp}°`;
   };
 
-  return { appendTodayDetails, todayDetailsUI };
+  return {
+    appendTodayDetails, todayDetailsUI, todayDetailsValuestoCel, todayDetailsValuestoFah,
+  };
 })();
 
 export default setTodayDetails;

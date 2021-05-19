@@ -62,7 +62,7 @@ const setNextDays = (() => {
     nextDaysContainer.appendChild(nextOne);
     nextDaysContainer.appendChild(nextTwo);
     nextDaysContainer.appendChild(nextThree);
-  
+
     return nextDaysContainer;
   };
 
@@ -86,7 +86,56 @@ const setNextDays = (() => {
     nextTwoIcon.className = getIconTwo;
     nextThreeIcon.className = getIconThree;
   };
-  return { appendNextDays, nextDaysUI };
+
+  const nextDaysValuestoCel = () => {
+    const currentNextOneTemp = nextOneTemp.textContent;
+    const convertedNextOneTemp = setMain.fahToCel(currentNextOneTemp);
+    nextOneTemp.textContent = `${convertedNextOneTemp}°`;
+    // const currentNextOneWind = nextOneWind.textContent;
+    const convertedNextOneWind = setMain.convertWind(nextOneWind.textContent);
+    nextOneWind.textContent = `Wind: ${convertedNextOneWind}km/hr`;
+
+    const currentNextTwoTemp = nextTwoTemp.textContent;
+    const convertedNextTwoTemp = setMain.fahToCel(currentNextTwoTemp);
+    nextTwoTemp.textContent = `${convertedNextTwoTemp}°`;
+    // const currentNextTwoWind = nextTwoWind.textContent;
+    const convertedNextTwoWind = setMain.convertWind(nextTwoWind.textContent);
+    nextTwoWind.textContent = `Wind: ${convertedNextTwoWind}km/hr`;
+
+    const currentNextThreeTemp = nextThreeTemp.textContent;
+    const convertedNextThreeTemp = setMain.fahToCel(currentNextThreeTemp);
+    nextThreeTemp.textContent = `${convertedNextThreeTemp}°`;
+    // const currentNextThreeWind = nextThreeWind.textContent;
+    const convertedNextThreeWind = setMain.convertWind(nextThreeWind.textContent);
+    nextThreeWind.textContent = `Wind: ${convertedNextThreeWind}km/hr`;
+  };
+
+  const nextDaysValuestoFah = () => {
+    const currentNextOneTemp = nextOneTemp.textContent;
+    const convertedNextOneTemp = setMain.celToFah(currentNextOneTemp);
+    nextOneTemp.textContent = `${convertedNextOneTemp}°`;
+    // const currentNextOneWind = nextOneWind.textContent;
+    const convertedNextOneWind = setMain.convertWind(nextOneWind.textContent);
+    nextOneWind.textContent = `Wind: ${convertedNextOneWind}mph`;
+
+    const currentNextTwoTemp = nextTwoTemp.textContent;
+    const convertedNextTwoTemp = setMain.celToFah(currentNextTwoTemp);
+    nextTwoTemp.textContent = `${convertedNextTwoTemp}°`;
+    // const currentNextTwoWind = nextTwoWind.textContent;
+    const convertedNextTwoWind = setMain.convertWind(nextTwoWind.textContent);
+    nextTwoWind.textContent = `Wind: ${convertedNextTwoWind}mph`;
+
+    const currentNextThreeTemp = nextThreeTemp.textContent;
+    const convertedNextThreeTemp = setMain.celToFah(currentNextThreeTemp);
+    nextThreeTemp.textContent = `${convertedNextThreeTemp}°`;
+    // const currentNextThreeWind = nextThreeWind.textContent;
+    const convertedNextThreeWind = setMain.convertWind(nextThreeWind.textContent);
+    nextThreeWind.textContent = `Wind: ${convertedNextThreeWind}mph`;
+  };
+
+  return {
+    appendNextDays, nextDaysUI, nextDaysValuestoCel, nextDaysValuestoFah,
+  };
 })();
 
 export default setNextDays;

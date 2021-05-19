@@ -15,17 +15,17 @@ const setMain = (() => {
   const searchIcon = document.createElement('i');
   searchIcon.classList.add('fas');
   searchIcon.classList.add('fa-arrow-right');
-  searchIcon.addEventListener('click', function() {
+  searchIcon.addEventListener('click', () => {
     const input = document.querySelector('#search-input-id').value;
     const splitInput = input.split(' ');
     if (Number.isInteger(parseInt(splitInput[0]))) {
-      fetchWeather.findByZip(splitInput).then((fetchData) => {
+      fetchWeather.findByZip(splitInput, selectedUnit).then((fetchData) => {
         const cityByZip = fetchData.zipCity;
         todayCurrentUI(fetchData, cityByZip);
       });
     } else {
       const cityByCity = document.querySelector('#search-input-id').value;
-      fetchWeather.findByCity(cityByCity).then((fetchData) => {
+      fetchWeather.findByCity(cityByCity, selectedUnit).then((fetchData) => {
         todayCurrentUI(fetchData, cityByCity);
         setNextDays.nextDaysUI(fetchData);
         setTodayDetails.todayDetailsUI(fetchData);
@@ -34,7 +34,7 @@ const setMain = (() => {
   });
   const textBelowInput = document.createElement('p');
   textBelowInput.classList.add('text-below-input');
-  textBelowInput.textContent = `*If searching by zip code, please also provide the country's full-name separated by a space. I.E.: "11123 Country-name"`
+  textBelowInput.textContent = '*If searching by zip code, please also provide the country\'s full-name separated by a space. I.E.: "11123 Country-name"';
 
   const todayCurrentUI = (fetchData, city) => {
     document.getElementById('city-name-id').textContent = city;
@@ -80,9 +80,72 @@ const setMain = (() => {
   const celsius = document.createElement('h4');
   celsius.setAttribute('id', 'celsius-id');
   celsius.textContent = 'C°';
+  celsius.addEventListener('click', () => {
+    if (selectedUnit = 'fahrenheit') {
+      const currentTodayTemp = todayTemp.textContent;
+      const convertedTodayTemp = fahToCel(currentTodayTemp);
+      todayTemp.textContent = `${convertedTodayTemp}°`;
+      const currentTodayWind = todayWind.textContent;
+      const convertedTodayWind = convertWind(currentTodayWind);
+      todayWind.textContent = `Wind: ${convertedTodayWind}km/hr`;
+      setTodayDetails.todayDetailsValuestoCel();
+      setNextDays.nextDaysValuestoCel();
+      celsius.style.background = 'rgba(255, 255, 255, 0.8)';
+      celsius.style.color = '#5e2578';
+      fahrenheit.style.background = 'transparent';
+      fahrenheit.style.color = '#fff';
+      selectedUnit = 'celsius';
+    }
+  });
   const fahrenheit = document.createElement('h4');
   fahrenheit.setAttribute('id', 'fahrenheit-id');
   fahrenheit.textContent = 'F°';
+  fahrenheit.addEventListener('click', () => {
+    if (selectedUnit = 'celsius') {
+      const currentTodayTemp = todayTemp.textContent;
+      const convertedTodayTemp = celToFah(currentTodayTemp);
+      todayTemp.textContent = `${convertedTodayTemp}°`;
+      const currentTodayWind = todayWind.textContent;
+      const convertedTodayWind = convertWind(currentTodayWind);
+      todayWind.textContent = `Wind: ${convertedTodayWind}mph`;
+      setTodayDetails.todayDetailsValuestoFah();
+      setNextDays.nextDaysValuestoFah();
+      fahrenheit.style.background = 'rgba(255, 255, 255, 0.8)';
+      fahrenheit.style.color = '#5e2578';
+      celsius.style.background = 'transparent';
+      celsius.style.color = '#fff';
+      selectedUnit = 'fahrenheit';
+    }
+  });
+
+  const fahToCel = (current) => {
+    const newTemp = Math.floor((parseInt(current) - 32) * 5 / 9).toString();
+    return newTemp;
+  };
+
+  const celToFah = (current) => {
+    const newTemp = Math.floor((parseInt(current) * 9) / 5 + 32).toString();
+    return newTemp;
+  };
+
+  const convertWind = (currentTodayWind) => {
+    if (currentTodayWind.split('').includes('k')) {
+      const kmEl = currentTodayWind.split(' ').pop();
+      const k = kmEl.split('');
+      k.splice(-5, 5);
+      const joinNumK = k.join('');
+      const numK = parseInt(joinNumK[0]);
+      console.log((numK / 1.609344));
+      return Math.round((numK / 1.609344));
+    }
+    const mhEl = currentTodayWind.split(' ').pop();
+    const m = mhEl.split('');
+    m.splice(-3, 3);
+    const joinNumM = m.join('');
+    const numMh = parseInt(joinNumM[0]);
+    console.log((numMh * 1.609344));
+    return Math.round((numMh * 1.609344));
+  };
 
   const todayContainer = document.createElement('div');
   todayContainer.classList.add('today-div');
@@ -115,9 +178,14 @@ const setMain = (() => {
   const todayNextDays = document.createElement('div');
   todayNextDays.classList.add('today-next-days-div');
 
+  let selectedUnit;
+
   const defaultCity = () => {
     const monterrey = 'monterrey';
-    fetchWeather.findByCity(monterrey).then((fetchData) => {
+    selectedUnit = 'celsius';
+    celsius.style.background = 'rgba(255, 255, 255, 0.8)';
+    celsius.style.color = '#5e2578';
+    fetchWeather.findByCity(monterrey, selectedUnit).then((fetchData) => {
       todayCurrentUI(fetchData, monterrey);
       setNextDays.nextDaysUI(fetchData);
       setTodayDetails.todayDetailsUI(fetchData);
@@ -146,13 +214,15 @@ const setMain = (() => {
     mainContainer.appendChild(changeUnitContainer);
     mainContainer.appendChild(search);
     mainContainer.appendChild(todayNextDays);
-  
+
     return mainContainer;
-  }
+  };
 
   document.addEventListener('DOMContentLoaded', defaultCity());
 
-  return { appendMain, setIcon };
+  return {
+    appendMain, setIcon, fahToCel, celToFah, convertWind,
+  };
 })();
 
 export default setMain;

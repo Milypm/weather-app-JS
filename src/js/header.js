@@ -32,10 +32,10 @@ const setHeader = () => {
 
   headerTitleIcon.appendChild(headerTitle);
   headerTitleIcon.appendChild(headerIcon);
-  //search.appendChild(searchInput);
-  //search.appendChild(searchIcon);
+  // search.appendChild(searchInput);
+  // search.appendChild(searchIcon);
   headerContainer.appendChild(headerTitleIcon);
-  //headerContainer.appendChild(search);
+  // headerContainer.appendChild(search);
 
   return headerContainer;
 };
