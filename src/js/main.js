@@ -66,18 +66,19 @@ const setMain = (() => {
     const splitInput = input.split(' ');
     if (Number.isInteger(parseInt(splitInput[0], 10))) {
       fetchWeather.findByZip(splitInput, selectedUnit).then((fetchData) => {
-        const cityByZip = fetchData.zipCity;
+        const cityByZip = (fetchData.error === true) ? cityName.textContent : fetchData.zipCity;
         todayCurrentUI(fetchData, cityByZip);
       });
     } else {
-      const cityByCity = searchInput.value;
-      fetchWeather.findByCity(cityByCity, selectedUnit).then((fetchData) => {
+      fetchWeather.findByCity(searchInput.value, selectedUnit).then((fetchData) => {
+        const cityByCity = (fetchData.error === true) ? cityName.textContent : searchInput.value;
         todayCurrentUI(fetchData, cityByCity);
         setNextDays.nextDaysUI(fetchData);
         setTodayDetails.todayDetailsUI(fetchData);
       });
     }
   });
+
   const textBelowInput = document.createElement('p');
   textBelowInput.classList.add('text-below-input');
   textBelowInput.textContent = '*If searching by zip code, please also provide the country\'s full-name separated by a space. I.E.: "11123 Country-name"';
@@ -127,6 +128,26 @@ const setMain = (() => {
     }
   });
 
+  const modal = document.createElement('div');
+  modal.classList.add('modal');
+  modal.setAttribute('id', 'modal-id');
+  const modalContent = document.createElement('div');
+  modalContent.classList.add('modal-content');
+  const closeModal = document.createElement('span');
+  closeModal.classList.add('close-modal');
+  closeModal.textContent = 'x';
+  closeModal.addEventListener('click', () => {
+    modal.style.display = 'none';
+  });
+  const modalText = document.createElement('p');
+  modalText.textContent = 'We could not find that location. Please try again.';
+
+  window.addEventListener('click', (event) => {
+    if (event.target === modal) {
+      modal.style.display = 'none';
+    }
+  });
+
   const defaultCity = () => {
     const monterrey = 'monterrey';
     selectedUnit = 'celsius';
@@ -158,9 +179,14 @@ const setMain = (() => {
     todayContainer.appendChild(setTodayDetails.appendTodayDetails());
     todayNextDays.appendChild(todayContainer);
     todayNextDays.appendChild(setNextDays.appendNextDays());
+    modalContent.appendChild(modalText);
+    modalContent.appendChild(closeModal);
+    modal.appendChild(modalContent);
+
     mainContainer.appendChild(changeUnitContainer);
     mainContainer.appendChild(search);
     mainContainer.appendChild(todayNextDays);
+    mainContainer.appendChild(modal);
 
     return mainContainer;
   };
