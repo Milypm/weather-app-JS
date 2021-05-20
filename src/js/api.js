@@ -44,7 +44,7 @@ const fetchWeather = (() => {
     data.dateTime = format(cityCurrentDate, 'E MMM do, p');
     data.degrees = Math.round(parseInt(jsonData.current.temp, 10)).toString();
     data.atmosphere = jsonData.current.weather[0].description;
-    data.wind = Math.round(parseInt(jsonData.current.wind_speed, 10) * 18 / 5);
+    data.wind = (Math.round(parseInt(jsonData.current.wind_speed, 10) * 18) / 5);
     data.main = jsonData.current.weather[0].main;
     data.iconId = jsonData.current.weather[0].icon;
     const getCity = jsonData.timezone.split('/').pop();
@@ -58,21 +58,21 @@ const fetchWeather = (() => {
     data.nextOneAtmosphere = jsonData.daily[1].weather[0].description;
     data.nextOneMain = jsonData.daily[1].weather[0].main;
     data.nextOneIcon = jsonData.daily[1].weather[0].icon;
-    data.nextOneWind = Math.round(parseInt(jsonData.daily[1].wind_speed, 10) * 18 / 5);
+    data.nextOneWind = (Math.round(parseInt(jsonData.daily[1].wind_speed, 10) * 18) / 5);
     const nextTemp2 = new Date(jsonData.daily[2].dt * 1000);
     data.nextTwoTime = format(nextTemp2, 'E MMM do');
     data.nextTwoTemp = Math.round(parseInt(jsonData.daily[2].temp.morn, 10)).toString();
     data.nextTwoAtmosphere = jsonData.daily[2].weather[0].description;
     data.nextTwoMain = jsonData.daily[2].weather[0].main;
     data.nextTwoIcon = jsonData.daily[2].weather[0].icon;
-    data.nextTwoWind = Math.round(parseInt(jsonData.daily[2].wind_speed, 10) * 18 / 5);
+    data.nextTwoWind = (Math.round(parseInt(jsonData.daily[2].wind_speed, 10) * 18) / 5);
     const nextTemp3 = new Date(jsonData.daily[3].dt * 1000);
     data.nextThreeTime = format(nextTemp3, 'E MMM do');
     data.nextThreeTemp = Math.round(parseInt(jsonData.daily[3].temp.morn, 10)).toString();
     data.nextThreeAtmosphere = jsonData.daily[3].weather[0].description;
     data.nextThreeMain = jsonData.daily[3].weather[0].main;
     data.nextThreeIcon = jsonData.daily[3].weather[0].icon;
-    data.nextThreeWind = Math.round(parseInt(jsonData.daily[3].wind_speed, 10) * 18 / 5);
+    data.nextThreeWind = (Math.round(parseInt(jsonData.daily[3].wind_speed, 10) * 18) / 5);
   };
 
   const getCode = (country) => {
@@ -111,6 +111,7 @@ const fetchWeather = (() => {
     } catch (error) {
       alert('Error: Oops, we could not find that city name :('); // eslint-disable-line no-alert
     }
+    return data;
   };
 
   const findByZip = async (splittedInput, unit) => {
@@ -132,6 +133,7 @@ const fetchWeather = (() => {
     } catch (error) {
       alert('Error: Oops, we could not find that zip code :('); // eslint-disable-line no-alert
     }
+    return data;
   };
 
   return { findByCity, findByZip };

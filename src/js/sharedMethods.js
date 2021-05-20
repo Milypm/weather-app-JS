@@ -24,15 +24,16 @@ const shared = (() => {
       if (main === 'Tornado') { return 'fas fa-exclamation-circle'; }
       if (otherConditions.includes(main)) { return 'fas fa-smog'; }
     }
+    return undefined;
   };
 
   const fahToCel = (current) => {
-    const newTemp = Math.floor((parseInt(current, 10) - 32) * 5 / 9).toString();
+    const newTemp = (Math.floor((parseInt(current, 10) - 32) * 5) / 9).toString();
     return newTemp;
   };
 
   const celToFah = (current) => {
-    const newTemp = Math.floor((parseInt(current, 10) * 9) / 5 + 32).toString();
+    const newTemp = (Math.floor((parseInt(current, 10) * 9) / 5) + 32).toString();
     return newTemp;
   };
 
