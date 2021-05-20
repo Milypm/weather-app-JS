@@ -1,4 +1,4 @@
-import setMain from './main';
+import shared from './sharedMethods';
 
 const setTodayDetails = (() => {
   const todayDetailsContainer = document.createElement('div');
@@ -50,25 +50,25 @@ const setTodayDetails = (() => {
 
   const todayDetailsValuestoCel = () => {
     const currentMornTemp = tempMorning.textContent;
-    const convertedMornTemp = setMain.fahToCel(currentMornTemp);
+    const convertedMornTemp = shared.fahToCel(currentMornTemp);
     tempMorning.textContent = `${convertedMornTemp}°`;
     const currentEvenTemp = tempAfternoon.textContent;
-    const convertedEvenTemp = setMain.fahToCel(currentEvenTemp);
+    const convertedEvenTemp = shared.fahToCel(currentEvenTemp);
     tempAfternoon.textContent = `${convertedEvenTemp}°`;
     const currentNightTemp = tempNight.textContent;
-    const convertedNightTemp = setMain.fahToCel(currentNightTemp);
+    const convertedNightTemp = shared.fahToCel(currentNightTemp);
     tempNight.textContent = `${convertedNightTemp}°`;
   };
 
   const todayDetailsValuestoFah = () => {
     const currentMornTemp = tempMorning.textContent;
-    const convertedMornTemp = setMain.celToFah(currentMornTemp);
+    const convertedMornTemp = shared.celToFah(currentMornTemp);
     tempMorning.textContent = `${convertedMornTemp}°`;
     const currentEvenTemp = tempAfternoon.textContent;
-    const convertedEvenTemp = setMain.celToFah(currentEvenTemp);
+    const convertedEvenTemp = shared.celToFah(currentEvenTemp);
     tempAfternoon.textContent = `${convertedEvenTemp}°`;
     const currentNightTemp = tempNight.textContent;
-    const convertedNightTemp = setMain.celToFah(currentNightTemp);
+    const convertedNightTemp = shared.celToFah(currentNightTemp);
     tempNight.textContent = `${convertedNightTemp}°`;
   };
 

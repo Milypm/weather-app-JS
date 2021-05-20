@@ -1,4 +1,4 @@
-import setMain from './main';
+import shared from './sharedMethods';
 
 const setNextDays = (() => {
   const nextDaysContainer = document.createElement('div');
@@ -79,9 +79,12 @@ const setNextDays = (() => {
     nextOneWind.textContent = `Wind: ${fetchData.nextOneWind}km/hr`;
     nextTwoWind.textContent = `Wind: ${fetchData.nextTwoWind}km/hr`;
     nextThreeWind.textContent = `Wind: ${fetchData.nextThreeWind}km/hr`;
-    const getIconOne = setMain.setIcon(fetchData.nextOneMain, fetchData.nextOneAtmosphere, fetchData.nextOneIcon);
-    const getIconTwo = setMain.setIcon(fetchData.nextTwoMain, fetchData.nextTwoAtmosphere, fetchData.nextTwoIcon);
-    const getIconThree = setMain.setIcon(fetchData.nextThreeMain, fetchData.nextThreeAtmosphere, fetchData.nextThreeIcon);
+    const getIconOne = shared.setIcon(fetchData.nextOneMain, fetchData.nextOneAtmosphere,
+      fetchData.nextOneIcon);
+    const getIconTwo = shared.setIcon(fetchData.nextTwoMain, fetchData.nextTwoAtmosphere,
+      fetchData.nextTwoIcon);
+    const getIconThree = shared.setIcon(fetchData.nextThreeMain, fetchData.nextThreeAtmosphere,
+      fetchData.nextThreeIcon);
     nextOneIcon.className = getIconOne;
     nextTwoIcon.className = getIconTwo;
     nextThreeIcon.className = getIconThree;
@@ -89,47 +92,41 @@ const setNextDays = (() => {
 
   const nextDaysValuestoCel = () => {
     const currentNextOneTemp = nextOneTemp.textContent;
-    const convertedNextOneTemp = setMain.fahToCel(currentNextOneTemp);
+    const convertedNextOneTemp = shared.fahToCel(currentNextOneTemp);
     nextOneTemp.textContent = `${convertedNextOneTemp}°`;
-    // const currentNextOneWind = nextOneWind.textContent;
-    const convertedNextOneWind = setMain.convertWind(nextOneWind.textContent);
+    const convertedNextOneWind = shared.convertWind(nextOneWind.textContent);
     nextOneWind.textContent = `Wind: ${convertedNextOneWind}km/hr`;
 
     const currentNextTwoTemp = nextTwoTemp.textContent;
-    const convertedNextTwoTemp = setMain.fahToCel(currentNextTwoTemp);
+    const convertedNextTwoTemp = shared.fahToCel(currentNextTwoTemp);
     nextTwoTemp.textContent = `${convertedNextTwoTemp}°`;
-    // const currentNextTwoWind = nextTwoWind.textContent;
-    const convertedNextTwoWind = setMain.convertWind(nextTwoWind.textContent);
+    const convertedNextTwoWind = shared.convertWind(nextTwoWind.textContent);
     nextTwoWind.textContent = `Wind: ${convertedNextTwoWind}km/hr`;
 
     const currentNextThreeTemp = nextThreeTemp.textContent;
-    const convertedNextThreeTemp = setMain.fahToCel(currentNextThreeTemp);
+    const convertedNextThreeTemp = shared.fahToCel(currentNextThreeTemp);
     nextThreeTemp.textContent = `${convertedNextThreeTemp}°`;
-    // const currentNextThreeWind = nextThreeWind.textContent;
-    const convertedNextThreeWind = setMain.convertWind(nextThreeWind.textContent);
+    const convertedNextThreeWind = shared.convertWind(nextThreeWind.textContent);
     nextThreeWind.textContent = `Wind: ${convertedNextThreeWind}km/hr`;
   };
 
   const nextDaysValuestoFah = () => {
     const currentNextOneTemp = nextOneTemp.textContent;
-    const convertedNextOneTemp = setMain.celToFah(currentNextOneTemp);
+    const convertedNextOneTemp = shared.celToFah(currentNextOneTemp);
     nextOneTemp.textContent = `${convertedNextOneTemp}°`;
-    // const currentNextOneWind = nextOneWind.textContent;
-    const convertedNextOneWind = setMain.convertWind(nextOneWind.textContent);
+    const convertedNextOneWind = shared.convertWind(nextOneWind.textContent);
     nextOneWind.textContent = `Wind: ${convertedNextOneWind}mph`;
 
     const currentNextTwoTemp = nextTwoTemp.textContent;
-    const convertedNextTwoTemp = setMain.celToFah(currentNextTwoTemp);
+    const convertedNextTwoTemp = shared.celToFah(currentNextTwoTemp);
     nextTwoTemp.textContent = `${convertedNextTwoTemp}°`;
-    // const currentNextTwoWind = nextTwoWind.textContent;
-    const convertedNextTwoWind = setMain.convertWind(nextTwoWind.textContent);
+    const convertedNextTwoWind = shared.convertWind(nextTwoWind.textContent);
     nextTwoWind.textContent = `Wind: ${convertedNextTwoWind}mph`;
 
     const currentNextThreeTemp = nextThreeTemp.textContent;
-    const convertedNextThreeTemp = setMain.celToFah(currentNextThreeTemp);
+    const convertedNextThreeTemp = shared.celToFah(currentNextThreeTemp);
     nextThreeTemp.textContent = `${convertedNextThreeTemp}°`;
-    // const currentNextThreeWind = nextThreeWind.textContent;
-    const convertedNextThreeWind = setMain.convertWind(nextThreeWind.textContent);
+    const convertedNextThreeWind = shared.convertWind(nextThreeWind.textContent);
     nextThreeWind.textContent = `Wind: ${convertedNextThreeWind}mph`;
   };
 
