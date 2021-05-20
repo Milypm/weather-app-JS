@@ -7,7 +7,7 @@
 > I created this web app for a fictional weather-site. It's a single page fully built with JavaScript. Webpack was used for bundling different modules and styles.
 
 ## Live Project
-You can visit the live project here: [Github page]()
+You can visit the live project here: [Github page](https://milypm.github.io/weather-app-JS/)
 
 ## Built With
 - JavaScript
