@@ -23,6 +23,10 @@ You can visit the live project here: [Github page](https://milypm.github.io/weat
 - Go to the repo root directory
 - Right click on 'dist/index.html' file > Open with Live Server
 
+## Acknowledgements
+- [OpenWeatherMap](https://openweathermap.org/)
+- [CountryFlags](https://www.countryflags.io/)
+
 ## Author
 **Mily Puente** :woman_technologist:
 - GitHub: [@Milypm](https://github.com/Milypm)
